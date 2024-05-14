@@ -20,8 +20,8 @@ class firstFit:
                 print("Não alocado", end="")
                 print("")
 
-bloco = [1, 12, 12, 12]
-processo = [10, 2, 20, 51, 34, 13, 14, 6, 11]
+bloco = [15, 20, 25]
+processo = [10, 6, 10, 9, 1]
 tam_bloco = len(bloco)
 tam_processo = len(processo)
 
