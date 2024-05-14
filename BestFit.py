@@ -1,15 +1,14 @@
-# Inicializa a memória com espaços livres
-memoria = [' '] * 100   # aqui sera uma lista que chamei memoria que ocupa 100 espaços
+memoria = [' '] * 100  # Inicializa a memória com espaços livres
 
-def aloca_memoria_best_fit(tamanho):  # função que sera alocado o tamanho da lista 
-    for i in range(len(memoria)): # laço de repetição for que sera para itera sobre cada posição na lista
-        if memoria[i] == ' ' and tamanho <= len(memoria) - i:  # verificar se  a lista esta vazia
-            memoria[i:i+tamanho] = ['x'] * tamanho  # Atribui 'x' para o tamanho especificado
-            return True 
-    return False # não houver espaço disponível para alocar o tamanho especificado.
+def aloca_memoria_best_fit(tamanho):  
+    for i in range(len(memoria)):  
+        if memoria[i] == ' ':  
+            if i + tamanho <= len(memoria):  
+                memoria[i:i+tamanho] = ['x'] * tamanho  
+                return True  
+    return False  
 
-while True: # : Inicia um loop infinito que continuará até que uma condição de saída seja alcançada.
-
+while True:  
     print("1 - Alocação de memória usando Best Fit")
     print("2 - Sair")
     opcao = int(input("Escolha uma opção: "))
@@ -18,10 +17,14 @@ while True: # : Inicia um loop infinito que continuará até que uma condição 
         tamanho = int(input("Digite o tamanho da informação a ser alocada: "))
         if aloca_memoria_best_fit(tamanho):
             print("Memória alocada com sucesso.")
-        break # Encerra o loop while.
+        else:
+            print("Não foi possível alocar a memória.")
+    elif opcao == 2:
+        break  # Encerra o loop while.
+    else:
+        print("Opção inválida.")
 
 # Imprime o estado final da memória
 print("\nEstado final da memória:")
 for i in range(len(memoria)):
     print(f"Posição {i}: {'x' if memoria[i] == 'x' else ' '}", end=" ")
-
