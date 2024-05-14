@@ -1,30 +1,38 @@
-memoria = [' '] * 100  # Inicializa a memória com espaços livres
-
-def aloca_memoria_best_fit(tamanho):  
-    for i in range(len(memoria)):  
-        if memoria[i] == ' ':  
-            if i + tamanho <= len(memoria):  
-                memoria[i:i+tamanho] = ['x'] * tamanho  
-                return True  
-    return False  
-
-while True:  
-    print("1 - Alocação de memória usando Best Fit")
-    print("2 - Sair")
-    opcao = int(input("Escolha uma opção: "))
+def melhorEncaixe(tamanhoBloco, m, tamanhoProcesso, n):
+    # Armazena o ID do bloco alocado para cada processo
+    alocacao = [-1] * n 
     
-    if opcao == 1:
-        tamanho = int(input("Digite o tamanho da informação a ser alocada: "))
-        if aloca_memoria_best_fit(tamanho):
-            print("Memória alocada com sucesso.")
+    # Para cada processo, encontre os blocos adequados de acordo com seu tamanho e atribua a ele
+    for i in range(n):
+        # Encontre o bloco de melhor encaixe para o processo atual
+        melhorIdx = -1
+        for j in range(m):
+            if tamanhoBloco[j] >= tamanhoProcesso[i]:
+                if melhorIdx == -1: 
+                    melhorIdx = j 
+                elif tamanhoBloco[melhorIdx] > tamanhoBloco[j]: 
+                    melhorIdx = j
+  
+        # Se pudermos encontrar um bloco para o processo atual
+        if melhorIdx != -1:
+            # aloque o bloco j para o processo p[i] 
+            alocacao[i] = melhorIdx 
+            # Reduza a memória disponível neste bloco
+            tamanhoBloco[melhorIdx] -= tamanhoProcesso[i]
+  
+    print("No. Processo  Tamanho do Processo  Número do Bloco")
+    for i in range(n):
+        print(i + 1, "     	", tamanhoProcesso[i], end="     	") 
+        if alocacao[i] != -1: 
+            print(alocacao[i] + 1) 
         else:
-            print("Não foi possível alocar a memória.")
-    elif opcao == 2:
-        break  # Encerra o loop while.
-    else:
-        print("Opção inválida.")
-
-# Imprime o estado final da memória
-print("\nEstado final da memória:")
-for i in range(len(memoria)):
-    print(f"Posição {i}: {'x' if memoria[i] == 'x' else ' '}", end=" ")
+            print("Não Alocado")
+  
+# Código de execução 
+if __name__ == '__main__': 
+    tamanhoBloco = [100, 500, 200, 300, 600] 
+    tamanhoProcesso = [212, 417, 112, 426] 
+    m = len(tamanhoBloco) 
+    n = len(tamanhoProcesso) 
+  
+    melhorEncaixe(tamanhoBloco, m, tamanhoProcesso, n)
