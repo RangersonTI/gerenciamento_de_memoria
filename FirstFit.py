@@ -10,7 +10,7 @@ class firstFit:
                     bloco[j] -= processo[i]
                     break
 
-        # Imprimindo os resultados
+        # impressão dos resultados
         print("\nN° do Processo.\tTam. Processo \tN° do Bloco.\n", end="")
         for i in range(tam_processo):
             print(str(i + 1) + "\t\t" + str(processo[i]) + "\t\t", end="")
@@ -18,10 +18,9 @@ class firstFit:
                 print(str(alocacao[i] + 1))
             else:
                 print("Não alocado", end="")
-                print("")
 
-bloco = [15, 20, 25]
-processo = [10, 6, 10, 9, 1]
+bloco = [15, 20, 25, 20]
+processo = [10, 6, 10, 9, 1, 12, 15, 8]
 tam_bloco = len(bloco)
 tam_processo = len(processo)
 
