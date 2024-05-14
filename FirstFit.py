@@ -21,7 +21,7 @@ class firstFit:
                 print("")
 
 bloco = [1, 12, 12, 12]
-processo = [10, 20, 51, 34, 13, 14, 6, 11]
+processo = [10, 2, 20, 51, 34, 13, 14, 6, 11]
 tam_bloco = len(bloco)
 tam_processo = len(processo)
 
